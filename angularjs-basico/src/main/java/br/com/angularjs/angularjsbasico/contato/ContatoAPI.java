@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/contato")
 public class ContatoAPI {
@@ -17,7 +18,6 @@ public class ContatoAPI {
     @Autowired
     private ContatoService contatoService;
     
-    @CrossOrigin
     @GetMapping
     public List<ContatoDto> listarTodosContatos() {
         return this.contatoService.listarTodosContatos();

@@ -1,5 +1,4 @@
-angular.module("listaTelefonica", ["ngMessages"]);
-angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, $http){
+angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, contatosAPI, operadorasAPI){
         $scope.app = "Lista Telefônica";
         
         $scope.contatos = [];
@@ -7,37 +6,30 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($s
         $scope.operadoras = [];
 
 		var carregarContatos = function () {
-			$http({
-				method: 'GET',
-				url: 'http://localhost:9999/contato'
-			}).then(function sucessCallBack(response){
+			contatosAPI.getContatos().then(function sucessCallBack(response){
 				$scope.contatos = response.data;
-			}, function errorCallback(response){
+			}, function errorCallback(){
                 alert("Ocorreu um erro")
             });
 		};
 
         var carregarOperadoras = function () {
-            $http({
-                method: 'GET',
-                url: 'http://localhost:9999/operadora'
-            }).then(function sucessCallBack(response){
+            operadorasAPI.getOperadoras().then(function sucessCallBack(response){
                 $scope.operadoras = response.data;
-            }, function errorCallback(response){
+            }, function errorCallback(){
                 alert("Ocorreu um erro")
             });
         };
 
         $scope.adicionarContato = function (contato) {
             contato.data = new Date();
-            $http({
-                method: 'POST',
-                url: 'http://localhost:9999/contato'
-            }).then(function sucessCallBack(response){
-                $
-            })//terminar
-            delete $scope.contato;
-            $scope.contatoForm.$setPristine();
+            contatosAPI.saveContato(contato).then(function sucessCallBack(){
+				delete $scope.contato;
+           		$scope.contatoForm.$setPristine();
+				carregarContatos();
+            }, function errorCallback(){
+                alert("Ocorreu um erro")
+            });
         };
 
         $scope.apagarContatos = function (contatos) {

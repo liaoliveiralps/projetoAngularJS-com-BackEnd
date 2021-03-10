@@ -79,4 +79,8 @@ public class Contato {
         this.operadora = operadora;
     }
     
+    public ContatoDto entidadeEmDto() {
+        return new ContatoDto(this.nome, this.telefone, this.data, this.operadora);
+    }
+    
 }
