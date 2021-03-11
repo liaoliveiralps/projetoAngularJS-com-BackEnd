@@ -5,6 +5,7 @@
 <title>Lista Telefonica</title>
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap-3.1.1/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap-3.1.1/css/app.css">
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap-3.1.1/css/ui.css">
 
 <script src="lib/angularJS/angular.js"></script>
 <script src="lib/angularJS/angular-messages.js"></script>
@@ -16,11 +17,31 @@
 <script src="js/value/configValue.js"></script>
 <script src="js/filters/nameFilter.js"></script>
 <script src="js/filters/ellipsisFilter.js"></script>
+<script src="js/directives/uiAlertDirective.js"></script>
+<script src="js/directives/uiDateDirective.js"></script>
+<script src="js/directives/uiAccordionDirective.js"></script>
 
 </head>
 <body ng-controller="listaTelefonicaCtrl">
     <div class="jumbotron">
-        <h3>{{app}}</h3>
+
+        <ui-accordions>
+            <ui-accordion title="Accordion 1">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptatem, incidunt iusto cumque aliquam aspernatur nesciunt quidem nam deserunt neque soluta beatae unde, atque similique reiciendis vitae quo ex nemo!
+            </ui-accordion>
+
+            <ui-accordion title="Accordion 2">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam neque blanditiis culpa enim, tempore unde eaque inventore saepe non veniam rem illo optio! Magnam, tenetur a. Ea, quas. Dignissimos, sunt!
+            </ui-accordion>
+
+            <ui-accordion title="Accordion 3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam neque blanditiis culpa enim, tempore unde eaque inventore saepe non veniam rem illo optio! Magnam, tenetur a. Ea, quas. Dignissimos, sunt!
+            </ui-accordion>
+
+            <ui-accordion title="Accordion 4">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis voluptate beatae qui odit pariatur est eveniet ex et provident eum facilis nam, similique corrupti consectetur mollitia, aspernatur saepe. Commodi, asperiores?
+            </ui-accordion>
+        </ui-accordions>
         <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está procurando?"/>
         <table ng-show="contatos.length > 0" class="table">
             <tr>
@@ -28,18 +49,21 @@
                 <th><a href="" ng-click="ordernarPor('nome')">Nome</a></th>
                 <th><a href="" ng-click="ordernarPor('telefone')">Telefone</a></th>
                 <th>Operadora</th>
+                <th>Data</th>
             </tr>
             <tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
 				<td><input type="checkbox" ng-model="contato.selecionado"/></td>
 				<td>{{contato.nome | name | ellipsis:10}}</td>
                 <td>{{contato.telefone}}</td>
                 <td>{{contato.operadora.nome}}</td>
+                <td>{{contato.data | date:'dd/MM/yyyy'}}</td>
             </tr>
         </table>
         <hr/>
         <form name="contatoForm">
         <input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
         <input class="form-control" type="text" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/"/>
+        <input class="form-control" type="text" ng-model="contato.data" name="data" placeholder="Data" ui-date/>
         <select style="margin-bottom: 5px" class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy:'nome'">
             <option value="">Selecione uma operadora</option>
         </select>

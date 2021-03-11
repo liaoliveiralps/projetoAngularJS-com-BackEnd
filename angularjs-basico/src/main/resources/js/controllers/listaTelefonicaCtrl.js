@@ -6,18 +6,17 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($s
         $scope.operadoras = [];
 
 		var carregarContatos = function () {
-			contatosAPI.getContatos().then(function sucessCallBack(response){
-				$scope.contatos = response.data;
-			}, function errorCallback(){
-                alert("Ocorreu um erro")
-            });
-		};
+            contatosAPI.getContatos().then(function (response) {
+                $scope.contatos = response.data;
+            }, function (error) {
+                $scope.error = "Não foi possível carregar os dados!";
+                }
+            );
+        };
 
         var carregarOperadoras = function () {
             operadorasAPI.getOperadoras().then(function sucessCallBack(response){
                 $scope.operadoras = response.data;
-            }, function errorCallback(){
-                alert("Ocorreu um erro")
             });
         };
 
