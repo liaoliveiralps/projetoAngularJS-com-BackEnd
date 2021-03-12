@@ -13,6 +13,8 @@ import br.com.angularjs.angularjsbasico.operadora.OperadoraDto;
 @JsonInclude(Include.NON_NULL)
 public class ContatoDto {
     
+    private Long id;
+    
     private String nome;
     
     private String telefone;
@@ -20,6 +22,10 @@ public class ContatoDto {
     private Date data;
     
     private OperadoraDto operadora;
+    
+    public Long getId() {
+        return this.id;
+    }
     
     public String getNome() {
         return this.nome;
@@ -37,7 +43,8 @@ public class ContatoDto {
         return this.operadora;
     }
     
-    public ContatoDto(final String nome, final String telefone, final Date data, final Operadora operadora) {
+    public ContatoDto(final Long id, final String nome, final String telefone, final Date data, final Operadora operadora) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.data = data;
@@ -45,6 +52,7 @@ public class ContatoDto {
     }
     
     public ContatoDto(final Contato contato) {
+        this.id = contato.getId();
         this.nome = contato.getNome();
         this.telefone = contato.getTelefone();
         this.data = contato.getData();
@@ -53,6 +61,6 @@ public class ContatoDto {
     public ContatoDto() {}
     
     public Contato dtoEmEntidade() {
-        return new Contato(this.nome, this.telefone, this.data, this.operadora.dtoEmEntidade());
+        return new Contato(this.id, this.nome, this.telefone, this.data, this.operadora.dtoEmEntidade());
     }
 }

@@ -5,6 +5,13 @@ angular.module("listaTelefonica").factory("contatosAPI", function ($http, config
 				url: config.baseUrl + '/contato'
 			});
 	};
+
+	var _getContato = function (id) {
+		return $http({
+				method: 'GET',
+				url: config.baseUrl + '/contato/' + id
+			});
+	};
 	
 	var _saveContato = function (contato) {
 		return $http({
@@ -23,6 +30,7 @@ angular.module("listaTelefonica").factory("contatosAPI", function ($http, config
 	
 	return {
 		getContatos: _getContatos,
+		getContato: _getContato,
 		saveContato: _saveContato
 	};
 	

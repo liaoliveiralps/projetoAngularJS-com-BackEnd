@@ -38,6 +38,10 @@ public class Contato {
     @JoinColumn(name = "operadora")
     private Operadora operadora;
     
+    public Long getId() {
+        return this.id;
+    }
+    
     public String getNome() {
         return this.nome;
     }
@@ -70,17 +74,18 @@ public class Contato {
         this.operadora = operadora;
     }
     
-    public Contato() {}
-    
-    public Contato(final String nome, final String telefone, final Date data, final Operadora operadora) {
+    public Contato(final Long id, final String nome, final String telefone, final Date data, final Operadora operadora) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.data = data;
         this.operadora = operadora;
     }
     
+    public Contato() {}
+    
     public ContatoDto entidadeEmDto() {
-        return new ContatoDto(this.nome, this.telefone, this.data, this.operadora);
+        return new ContatoDto(this.id, this.nome, this.telefone, this.data, this.operadora);
     }
     
 }

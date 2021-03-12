@@ -22,10 +22,19 @@ public class ContatoRepository {
     
     public List<ContatoDto> listarTodosContatos() {
         final StringBuilder sql = new StringBuilder();
-        sql.append(" SELECT new br.com.angularjs.angularjsbasico.contato.ContatoDto(c.nome, c.telefone, c.data, c.operadora) ");
+        sql.append(" SELECT new br.com.angularjs.angularjsbasico.contato.ContatoDto(c.id, c.nome, c.telefone, c.data, c.operadora) ");
         sql.append(" FROM Contato c JOIN c.operadora p ");
         final TypedQuery<ContatoDto> typedQuery = this.entityManager.createQuery(sql.toString(), ContatoDto.class);
         return typedQuery.getResultList();
+    }
+    
+    public ContatoDto contatoPorId(final Long id) {
+        final StringBuilder sql = new StringBuilder();
+        sql.append(" SELECT new br.com.angularjs.angularjsbasico.contato.ContatoDto(c.id, c.nome, c.telefone, c.data, c.operadora) ");
+        sql.append(" FROM Contato c JOIN c.operadora p WHERE c.id=:id");
+        final TypedQuery<ContatoDto> typedQuery = this.entityManager.createQuery(sql.toString(), ContatoDto.class);
+        typedQuery.setParameter("id", id);
+        return typedQuery.getSingleResult();
     }
     
     public void salvarContato(final Contato contato) {

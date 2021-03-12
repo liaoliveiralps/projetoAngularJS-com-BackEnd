@@ -24,6 +24,10 @@ public class ContatoService {
         return this.contatoRepository.listarTodosContatos();
     }
     
+    public ContatoDto contatoPorId(final Long id) {
+        return this.contatoRepository.contatoPorId(id);
+    }
+    
     @Transactional
     public ContatoDto salvarContato(final ContatoDto contatoDto) {
         final Contato contato = contatoDto.dtoEmEntidade();

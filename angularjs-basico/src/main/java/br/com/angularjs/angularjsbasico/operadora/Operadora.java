@@ -60,13 +60,13 @@ public class Operadora {
         this.contato = contato;
     }
     
-    public Operadora() {}
-    
     public Operadora(final String nome, final Long codigo, final String categoria) {
         this.nome = nome;
         this.codigo = codigo;
         this.categoria = categoria;
     }
+    
+    public Operadora() {}
     
     public OperadoraDto entidadeEmDto() {
         return new OperadoraDto(this.nome, this.codigo, this.categoria);

@@ -1,0 +1,29 @@
+<div class="jumbotron">
+    <table class="table">
+        <tr>
+            <th>Nome:</th>
+            <td>{{contato.nome | name}}</td>
+        </tr>
+        <tr>
+            <th>Telefone:</th>
+            <td>{{contato.telefone}}</td>
+        </tr>
+        <tr>
+            <th>Data:</th>
+            <td>{{contato.data| date:"dd/MM/yyyy"}}</td>
+        </tr>
+        <tr>
+            <th>Operadora:</th>
+            <td>{{contato.operadora.nome}}</td>
+        </tr>
+        <tr>
+            <th>Código:</th>
+            <td>{{contato.operadora.codigo}}</td>
+        </tr>
+        <tr>
+            <th>Categoria:</th>
+            <td>{{contato.operadora.categoria}}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary btn-block" href="#/contato">Voltar</a>
+</div>
