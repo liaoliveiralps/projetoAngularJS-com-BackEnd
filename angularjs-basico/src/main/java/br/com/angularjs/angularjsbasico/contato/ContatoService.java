@@ -1,6 +1,7 @@
 package br.com.angularjs.angularjsbasico.contato;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
@@ -24,7 +25,7 @@ public class ContatoService {
         return this.contatoRepository.listarTodosContatos();
     }
     
-    public ContatoDto contatoPorId(final Long id) {
+    public Optional<ContatoDto> contatoPorId(final Long id) {
         return this.contatoRepository.contatoPorId(id);
     }
     
