@@ -1,5 +1,5 @@
-angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, contatos){
-        $scope.app = "Lista Telefônica";
+angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, contatos, $filter){
+        $scope.app = $filter('upper')("Lista Telefônica");
         
         $scope.contatos = contatos.data;
 

@@ -1,6 +1,7 @@
 <div class="jumbotron">
+    <h3>{{app}}</h3>
     <input class="form-control" type="text" ng-model="criterioDeBusca" ng-model-options="{updateOn: 'default blur', debounce:{default: 500, blur: 0}}" placeholder="O que você está procurando?"/>
-    <table ng-show="contatos.length > 0" class="table table-striped">
+    <table ng-show="contatos.length > 0" class="table">
         <tr>
             <th></th>
             <th><a href="" ng-click="ordernarPor('nome')">Nome</a></th>
@@ -8,7 +9,7 @@
             <th>Operadora</th>
             <th>Data</th>
         </tr>
-        <tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+        <tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao" track by contato.id>
             <td><input type="checkbox" ng-model="contato.selecionado" ng-selected="verificarContatoSelecionado(contatos)"/></td>
             <td><a href="#/detalhesContato/{{contato.id}}">{{::contato.nome | name}}</a></td>
             <td>{{::contato.telefone}}</td>
