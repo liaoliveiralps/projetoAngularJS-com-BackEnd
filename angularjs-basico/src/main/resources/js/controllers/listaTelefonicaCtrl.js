@@ -9,11 +9,11 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($s
             $scope.contatos = contatos.filter(function (contato) {
                 if(!contato.selecionado) return contato;
             });
-            
+            $scope.verificarContatoSelecionado($scope.contatos);
         };
 
-        $scope.isContatoSelecionado = function (contatos) {
-            return contatos.some(function (contato){
+        $scope.verificarContatoSelecionado = function (contatos) {
+            $scope.hasContatoSelecionado = contatos.some(function (contato) {
                 return contato.selecionado;
             });
         };
