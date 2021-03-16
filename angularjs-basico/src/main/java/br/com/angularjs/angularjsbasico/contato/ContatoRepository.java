@@ -38,8 +38,19 @@ public class ContatoRepository {
         
     }
     
+    public Optional<Contato> procurarPorId(final Long id) {
+        try {
+            return Optional.of(this.entityManager.find(Contato.class, id));
+        } catch (final NoResultException resultException) {
+            return Optional.empty();
+        }
+    }
+    
     public void salvarContato(final Contato contato) {
         this.entityManager.persist(contato);
     }
     
+    public void excluirContato(final Contato contato) {
+        this.entityManager.remove(contato);
+    }
 }

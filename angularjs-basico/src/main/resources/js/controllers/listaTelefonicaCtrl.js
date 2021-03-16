@@ -1,4 +1,4 @@
-angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, contatos, $filter){
+angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, contatos, $filter, contatosAPI){
         $scope.app = $filter('upper')("Lista Telefônica");
         
         $scope.contatos = contatos.data;
@@ -7,7 +7,14 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($s
 
         $scope.apagarContatos = function (contatos) {
             $scope.contatos = contatos.filter(function (contato) {
-                if(!contato.selecionado) return contato;
+                if(contato.selecionado){
+                    contatosAPI.deleteContato(contato.id).then(function sucessCallBack(){
+                    }, function errorCallback(){
+                        alert("Ocorreu um erro")
+                    });
+                } else {
+                    return contato;
+                }
             });
             $scope.verificarContatoSelecionado($scope.contatos);
         };

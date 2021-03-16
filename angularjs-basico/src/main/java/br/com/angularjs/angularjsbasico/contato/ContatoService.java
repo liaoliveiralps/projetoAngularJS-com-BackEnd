@@ -41,4 +41,16 @@ public class ContatoService {
             throw new IllegalStateException("Erro ao cadastrar pessoa");
         }
     }
+    
+    @Transactional
+    public void excluirContato(final Long id) {
+        final Optional<Contato> optional = this.contatoRepository.procurarPorId(id);
+        if (optional.isPresent()) {
+            final Contato contato = optional.get();
+            this.contatoRepository.excluirContato(contato);
+        } else {
+            throw new IllegalStateException("Não foi possível encontrar o contato.");
+        }
+        
+    }
 }
